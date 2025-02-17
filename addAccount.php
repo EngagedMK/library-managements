@@ -80,8 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="vaiTro">Vai Trò</label>
             <select name="vaiTro" id="vaiTro" class="form-control" required>
                 <option value="docgia" <?php echo $vaiTro === 'docgia' ? 'selected' : ''; ?>>Độc giả</option>
+                <?php if (strtolower($_SESSION['role']) === 'admin') : ?>
                 <option value="thuthu" <?php echo $vaiTro === 'thuthu' ? 'selected' : ''; ?>>Thủ thư</option>
                 <option value="admin" <?php echo $vaiTro === 'admin' ? 'selected' : ''; ?>>Admin</option>
+                <?php endif; ?>
+
             </select>
         </div>
 

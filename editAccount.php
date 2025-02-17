@@ -91,8 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
             <label for="vaiTro">Vai trò</label>
             <select name="vaiTro" id="vaiTro" class="form-control" required>
+                <?php if (strtolower($_SESSION['role']) === 'admin') : ?>
                 <option value="admin" <?= $account['vaiTro'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
                 <option value="thuthu" <?= $account['vaiTro'] === 'thuthu' ? 'selected' : ''; ?>>Thủ thư</option>
+                <?php endif; ?>
                 <option value="docgia" <?= $account['vaiTro'] === 'docgia' ? 'selected' : ''; ?>>Độc giả</option>
             </select>
         </div>
