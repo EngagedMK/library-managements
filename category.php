@@ -17,16 +17,11 @@ if (isset($_GET['search'])) {
     $searchTerm = mysqli_real_escape_string($conn, $_GET['search']);
 }
 
-// Tạo truy vấn SQL dựa trên vai trò
-if ($currentUserRole === 'thuthu') {
-    // Nếu vai trò là "thuthu", chỉ hiển thị tài khoản có vai trò là "docgia"
-    $sqlCount = "SELECT COUNT(*) as total FROM TaiKhoan WHERE tenDangNhap LIKE '%$searchTerm%' AND LOWER(vaiTro) = 'docgia'";
-    $sqlLogin = "SELECT * FROM TaiKhoan WHERE tenDangNhap LIKE '%$searchTerm%' AND LOWER(vaiTro) = 'docgia'";
-} else {
+
     // Mặc định cho admin
-    $sqlCount = "SELECT COUNT(*) as total FROM TaiKhoan WHERE tenDangNhap LIKE '%$searchTerm%'";
-    $sqlLogin = "SELECT * FROM TaiKhoan WHERE tenDangNhap LIKE '%$searchTerm%'";
-}
+    $sqlCount = "SELECT COUNT(*) as total FROM TheLoai WHERE tenTheLoai LIKE '%$searchTerm%'";
+    $sqlLogin = "SELECT * FROM TheLoai WHERE tenTheLoai LIKE '%$searchTerm%'";
+
 
 // Phân trang
 $rowsPerPage = 5;
@@ -66,7 +61,7 @@ $result = mysqli_query($conn, $sqlLogin);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Tài khoản</h2>
+                                <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Thể Loại</h2>
                                 <form method="GET" action="" class="mb-4">
                                 <div class="input-group md-form form-sm form-2 pl-0">
                                         <input class="form-control my-0 py-1 pl-3 purple-border" type="text" placeholder="Tìm kiếm..." aria-label="Search" name="search" value="<?php echo htmlspecialchars($searchTerm); ?>">
@@ -76,7 +71,7 @@ $result = mysqli_query($conn, $sqlLogin);
                             </div>
                         </div>
                         <div class="my-2 d-flex justify-content-end w-80 mr-3 ">
-                            <td colspan="4"  style="text-align: center;"><a href="addAccount.php" class="p-2 bg-primary text-white rounded" style="display: flex; justify-content:cente; align-items:center" ><i class="fa fa-plus-square-o" aria-hidden="true" style="font-size:20px;margin-right: 8px; "></i></i>Thêm mới</a></td>
+                            <td colspan="4"  style="text-align: center;"><a href="addCategory.php" class="p-2 bg-primary text-white rounded" style="display: flex; justify-content:cente; align-items:center" ><i class="fa fa-plus-square-o" aria-hidden="true" style="font-size:20px;margin-right: 8px; "></i></i>Thêm mới</a></td>
                         </div>
                         
                         <div class="table-responsive">
@@ -84,10 +79,8 @@ $result = mysqli_query($conn, $sqlLogin);
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên đăng nhập</th>
-                                    <th>mật khẩu</th>
-                                    <th>Vai trò</th>
-                                    <th>Trạng thái</th>
+                                    <th>Tên thể loại</th>
+                                    <th>Mô tả</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -98,14 +91,12 @@ $result = mysqli_query($conn, $sqlLogin);
                             <?php foreach ($result as $item) :?>
                                 <tr>
                                     <td scope="row"><?php echo $stt; ?></td>
-                                    <td><?php echo $item['tenDangNhap'] ;?></td>
-                                    <td><?php echo $item['matKhau']; ?></td>
-                                    <td><?php echo $item['vaiTro'] ;?></td>
-                                    <td><?php echo $item['trangThai']; ?></td>
+                                    <td><?php echo $item['tenTheLoai'] ;?></td>
+                                    <td><?php echo $item['moTa']; ?></td>
                                     <td>
                                     <div class="d-flex align-items-center justify-content-center" >
-                                        <a href="editAccount.php?id=<?php echo $item['idTaiKhoan']; ?>" class="p-1 mx-1"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;color: #F6C200"></i></a>  
-                                        <a href="deleteAccount.php?id=<?php echo $item['idTaiKhoan']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?')" class="p-1 mx-1">
+                                        <a href="editCategory.php?id=<?php echo $item['idTheLoai']; ?>" class="p-1 mx-1"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;color: #F6C200"></i></a>  
+                                        <a href="deleteCategory.php?id=<?php echo $item['idTheLoai']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sách này không?')" class="p-1 mx-1">
                                             <i class="fa fa-trash-o" aria-hidden="true" style="font-size:20px;color: #F63623"></i>
                                         </a>
                                     </div>
