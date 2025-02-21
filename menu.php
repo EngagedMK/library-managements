@@ -32,10 +32,21 @@ $current_page = basename($_SERVER['PHP_SELF']);
         background-color:#3651d4 !important;
         border-radius: 8px;
       }
+      .cuoi {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        width: 16rem;
+        bottom: 0;
+        left: 0;
+      }
     </style>
   </head>
   <body>
-    <nav style="height: auto !important">
+    <nav style="height: auto ">
+      <div class="cuoi">
       <div class="sidebar-top d_f_ju_center">
         <span class="shrink-btn">
           <i class="bx bx-chevron-left"></i>
@@ -120,7 +131,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </ul>
       </div>
 
-      <div class="sidebar-footer" style="margin-top: auto">
+      <div class="sidebar-footer" style="margin-top: auto; margin-bottom: 24px">
         <a href="#" class="account tooltip-element" data-tooltip="0">
           <i class="bx bx-user"></i>
         </a>
@@ -136,6 +147,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <i class="bx bx-log-out"></i>
           </a>
         </div>
+      </div>
       </div>
     </nav>
 

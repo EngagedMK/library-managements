@@ -33,8 +33,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             	$_SESSION['id'] = $row['idTaiKhoan'];
             	$_SESSION['role'] = $row['vaiTro'];
             	$_SESSION['status'] = $row['trangThai'];
-            	header("Location: dashboard.php");
-		        exit();
+
+				if (strtolower($row['vaiTro']) === 'docgia'){
+					header("Location: docgia/index.php");
+					exit();
+				} else {
+					header("Location: dashboard.php");
+					exit();
+				}
             }else{
 				header("Location: index.php?error=User name hoặc password không chính xác");
 		        exit();
