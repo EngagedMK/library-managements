@@ -594,3 +594,66 @@ body.shrink .tooltip {
 .active_text {
   color: #fff !important;
 }
+
+@-webkit-keyframes my {
+  0% {
+    color: #004a7f;
+  }
+  50% {
+    color: #0094ff;
+  }
+  100% {
+    color: #004a7f;
+  }
+}
+@-moz-keyframes my {
+  0% {
+    color: #004a7f;
+  }
+  50% {
+    color: #0094ff;
+  }
+  100% {
+    color: #004a7f;
+  }
+}
+@-o-keyframes my {
+  0% {
+    color: #004a7f;
+  }
+  50% {
+    color: #0094ff;
+  }
+  100% {
+    color: #004a7f;
+  }
+}
+@keyframes my {
+  0% {
+    color: #004a7f;
+  }
+  50% {
+    color: #0094ff;
+  }
+  100% {
+    color: #004a7f;
+  }
+}
+
+.nhapnhay {
+  font-weight: bold;
+  -webkit-animation: my 700ms infinite;
+  -moz-animation: my 700ms infinite;
+  -o-animation: my 700ms infinite;
+  animation: my 700ms infinite;
+}
+
+.box_db {
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  width: 100%;
+  padding: 20px 12px;
+  border-radius: 8px;
+  margin: 4px 8px;
+}
