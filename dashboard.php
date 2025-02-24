@@ -5,6 +5,11 @@
         include('logout.php');
         exit();
       }
+
+      if (strtolower($_SESSION['role']) === 'docgia' ) {
+        include('logout.php');
+        exit();
+    }
     
 ?>
 
@@ -17,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <div class="body_div">

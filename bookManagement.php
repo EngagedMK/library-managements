@@ -6,6 +6,11 @@ if (!isset($_SESSION['userName']) || strtolower($_SESSION['role']) != ('admin' |
     exit();
 }
 
+if (strtolower($_SESSION['role']) === 'docgia' ) {
+    include('logout.php');
+    exit();
+}
+
 require('config.php');
 
 // Lấy vai trò hiện tại của người dùng đăng nhập

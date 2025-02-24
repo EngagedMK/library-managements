@@ -4,6 +4,7 @@ require('config.php');
 // Biến để lưu giá trị đã nhập
 $tenTaiLieu = "";
 $tacGia = "";
+$tienCoc = "";
 $loaiTaiLieu = "";
 $soLuong = "";
 $errorMessage = "";
@@ -19,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tacGia = mysqli_real_escape_string($conn, $_POST['tacGia']);
     $soLuong = mysqli_real_escape_string($conn, $_POST['soLuong']);
     $loaiTaiLieu = mysqli_real_escape_string($conn, $_POST['loaiTaiLieu']);
+    $tienCoc = mysqli_real_escape_string($conn, $_POST['tienCoc']);
+
 
     // Kiểm tra xem file hình ảnh có được tải lên không
     if (isset($_FILES['img_file']) && $_FILES['img_file']['error'] === UPLOAD_ERR_OK) {
@@ -46,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (mysqli_num_rows($result) > 0) {
                     $errorMessage = "Tên sách đã tồn tại. Vui lòng chọn tên khác!";
                 } else {
-                    $sql = "INSERT INTO TaiLieu (tenTaiLieu, tacGia, soLuong, loaiTaiLieu, img_url) 
-                            VALUES ('$tenTaiLieu', '$tacGia', '$soLuong', '$loaiTaiLieu', '$uploadFilePath')";
+                    $sql = "INSERT INTO TaiLieu (tenTaiLieu, tacGia, soLuong, loaiTaiLieu, img_url, tienCoc) 
+                    VALUES ('$tenTaiLieu', '$tacGia', '$soLuong', '$loaiTaiLieu', '$uploadFilePath', '$tienCoc')";
 
                     if (mysqli_query($conn, $sql)) {
                         header("Location: bookManagement.php?status=success&message=Thêm thành công!");
@@ -120,6 +123,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="soLuong">Số lượng</label>
             <input type="text" name="soLuong" id="soLuong" class="form-control" value="<?php echo htmlspecialchars($soLuong); ?>" required>
         </div>
+
+        <div class="form-group">
+            <label for="tienCoc">Tiền Cọc</label>
+            <input type="text" name="tienCoc" id="tienCoc" class="form-control" 
+                value="<?php echo htmlspecialchars($tienCoc ?? ''); ?>" required>
+        </div>
+
 
         <div class="form-group">
             <label for="img_file">Hình Ảnh</label>

@@ -11,7 +11,7 @@
           <!-- Grid column -->
           <div class="col-md-4">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="#!" class="text-white">Trang chủ</a>
+              <a href="index.php" class="text-white">Trang chủ</a>
             </h6>
           </div>
           <!-- Grid column -->
@@ -19,7 +19,7 @@
           <!-- Grid column -->
           <div class="col-md-4">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="#!" class="text-white">Sách</a>
+              <a href="book.php" class="text-white">Sách</a>
             </h6>
           </div>
           <!-- Grid column -->
@@ -27,7 +27,7 @@
           <!-- Grid column -->
           <div class="col-md-4">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="#!" class="text-white">Liên hệ</a>
+              <a href="contact.php" class="text-white">Liên hệ</a>
             </h6>
           </div>
           <!-- Grid column -->

@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['userName']) || strtolower($_SESSION['role']) != 'docgia' || strtolower($_SESSION['status']) != 'hoatdong') {
-        include('logout.php');
+        include('../logout.php');
         exit();
       }
     
