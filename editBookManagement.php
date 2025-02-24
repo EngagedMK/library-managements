@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tacGia = $_POST['tacGia'];
     $loaiTaiLieu = $_POST['loaiTaiLieu'];
     $soLuong = intval($_POST['soLuong']);
+    $tienCoc = floatval($_POST['tienCoc']);
     $img_url = $document['img_url']; // Giữ URL hình ảnh cũ nếu không tải lên ảnh mới
 
     // Kiểm tra nếu có file ảnh được tải lên
@@ -81,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Tên tài liệu đã tồn tại. Vui lòng chọn tên khác.";
     } else {
         // Cập nhật tài liệu
-        $updateSql = "UPDATE TaiLieu SET tenTaiLieu = ?, tacGia = ?, loaiTaiLieu = ?, soLuong = ?, img_url = ? WHERE idTaiLieu = ?";
+        $updateSql = "UPDATE TaiLieu SET tenTaiLieu = ?, tacGia = ?, loaiTaiLieu = ?, soLuong = ?, tienCoc = ? , img_url = ? WHERE idTaiLieu = ?";
         $updateStmt = $conn->prepare($updateSql);
-        $updateStmt->bind_param("sssisi", $tenTaiLieu, $tacGia, $loaiTaiLieu, $soLuong, $img_url, $id);
+        $updateStmt->bind_param("sssiisi", $tenTaiLieu, $tacGia, $loaiTaiLieu, $soLuong, $tienCoc, $img_url, $id);
 
         if ($updateStmt->execute()) {
             header("Location: bookManagement.php?status=success&message=Tài liệu đã được cập nhật thành công.");
@@ -145,6 +146,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="soLuong">Số lượng</label>
             <input type="number" name="soLuong" id="soLuong" class="form-control" 
                    value="<?= htmlspecialchars($document['soLuong']); ?>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tienCoc">Tiền cọc</label>
+            <input type="number" step="0.01" name="tienCoc" id="tienCoc" class="form-control" 
+                value="<?= htmlspecialchars($document['tienCoc']); ?>" required>
         </div>
 
         <!-- Tải ảnh -->

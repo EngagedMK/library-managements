@@ -2,11 +2,14 @@
     // session_start();
 
     if (!isset($_SESSION['userName']) || strtolower($_SESSION['role']) != 'docgia' || strtolower($_SESSION['status']) != 'hoatdong') {
-        include('logout.php');
+        include('../logout.php');
         exit();
       }
 
       $name = $_SESSION['userName'];
+
+      $current_page = basename($_SERVER['PHP_SELF']);
+
     
 ?>
 
@@ -37,14 +40,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-                <li class="nav-item active">
-                    <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Trang chủ</a>
+                <li class="nav-item <?php echo $current_page == 'docgia/index.php' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i>Trang chủ</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Sách</a>
+                <li class="nav-item <?php echo $current_page == '/docgia/book.php' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="book.php"><i class="far fa-address-book"></i>Sách</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>liên hệ</a>
+                <li class="nav-item <?php echo $current_page == '/docgia/contact.php' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="contact.php"><i class="far fa-clone"></i>liên hệ</a>
                 </li>
             </ul>
         </div>
