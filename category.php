@@ -92,7 +92,7 @@ $result = mysqli_query($conn, $sqlLogin);
                         
                             <tbody>
                         <?php if (mysqli_num_rows($result) > 0): ?>
-                            <?php $stt=1; ?>
+                            <?php $stt=$offset + 1; ?>
                             <?php foreach ($result as $item) :?>
                                 <tr>
                                     <td scope="row"><?php echo $stt; ?></td>

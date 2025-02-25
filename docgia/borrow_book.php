@@ -18,55 +18,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ngayTra = $_POST['ngayTra'];
         $tienCoc = $_POST['tienCoc'];
 
-        if ($tienCoc > 0) {
-            // Tạo URL QR thanh toán
-            $bank = "MB";
-            $accountName = "Nguyen Xuan Khanh";
-            $accountNumber = "6688888882003";
-            $note = urlencode("Muon sach: ID Tai Lieu $idTaiLieu");
-            $qrUrl = "https://img.vietqr.io/image/{$bank}-{$accountNumber}-compact.png?amount={$tienCoc}&addInfo={$note}";
 
-            // Lưu thông tin vào session
-            $_SESSION['qrUrl'] = $qrUrl;
-            $_SESSION['ngayMuon'] = $ngayMuon;
-            $_SESSION['ngayTra'] = $ngayTra;
-            $_SESSION['tienCoc'] = $tienCoc;
-
-            // Hiển thị dialog mã QR
-            echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var modal = new bootstrap.Modal(document.getElementById('qrModal'));
-                    modal.show();
-                });
-            </script>";
+        if (strtotime($ngayTra) <= strtotime($ngayMuon)) {
+            $error = "Ngày trả phải lớn hơn ngày mượn!";
         } else {
-            
-        $sqlCheck = "SELECT soLuong FROM TaiLieu WHERE idTaiLieu = $idTaiLieu";
-        $resultCheck = mysqli_query($conn, $sqlCheck);
-        $book = mysqli_fetch_assoc($resultCheck);
+            if ($tienCoc > 0) {
+                // Tạo URL QR thanh toán
+                $bank = "MB";
+                $accountName = "Nguyen Xuan Khanh";
+                $accountNumber = "6688888882003";
+                $note = urlencode("Muon sach: ID Tai Lieu $idTaiLieu");
+                $qrUrl = "https://img.vietqr.io/image/{$bank}-{$accountNumber}-compact.png?amount={$tienCoc}&addInfo={$note}";
 
-        if ($book > 0) {
-            // Thêm thông tin mượn sách vào bảng MuonTra
-            $sqlInsert = "INSERT INTO MuonTra (idTaiLieu, idTaiKhoan, ngayMuon, ngayTra, tienCoc, trangThai)
-                          VALUES ('$idTaiLieu', '$idTaiKhoan', '$ngayMuon', '$ngayTra', '$tienCoc', 'Đang mượn')";
-            if (mysqli_query($conn, $sqlInsert)) {
-                // Trừ số lượng sách
-                $sqlUpdate = "UPDATE TaiLieu SET soLuong = soLuong - 1 WHERE idTaiLieu = $idTaiLieu";
-                mysqli_query($conn, $sqlUpdate);
+                // Lưu thông tin vào session
+                $_SESSION['qrUrl'] = $qrUrl;
+                $_SESSION['ngayMuon'] = $ngayMuon;
+                $_SESSION['ngayTra'] = $ngayTra;
+                $_SESSION['tienCoc'] = $tienCoc;
 
-                unset($_SESSION['qrUrl'], $_SESSION['ngayMuon'], $_SESSION['ngayTra'], $_SESSION['tienCoc']);
-                header("Location: book.php?status=success&message=Mượn sách thành công!");
-                exit();
+                // Hiển thị dialog mã QR
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var modal = new bootstrap.Modal(document.getElementById('qrModal'));
+                        modal.show();
+                    });
+                </script>";
             } else {
-                $error = "Có lỗi xảy ra: " . mysqli_error($conn);
+                
+            $sqlCheck = "SELECT soLuong FROM TaiLieu WHERE idTaiLieu = $idTaiLieu";
+            $resultCheck = mysqli_query($conn, $sqlCheck);
+            $book = mysqli_fetch_assoc($resultCheck);
+
+            if ($book > 0) {
+                // Thêm thông tin mượn sách vào bảng MuonTra
+                $sqlInsert = "INSERT INTO MuonTra (idTaiLieu, idTaiKhoan, ngayMuon, ngayTra, tienCoc, trangThai)
+                            VALUES ('$idTaiLieu', '$idTaiKhoan', '$ngayMuon', '$ngayTra', '$tienCoc', 'Đang mượn')";
+                if (mysqli_query($conn, $sqlInsert)) {
+                    // Trừ số lượng sách
+                    $sqlUpdate = "UPDATE TaiLieu SET soLuong = soLuong - 1 WHERE idTaiLieu = $idTaiLieu";
+                    mysqli_query($conn, $sqlUpdate);
+
+                    unset($_SESSION['qrUrl'], $_SESSION['ngayMuon'], $_SESSION['ngayTra'], $_SESSION['tienCoc']);
+                    header("Location: book.php?status=success&message=Mượn sách thành công!");
+                    exit();
+                } else {
+                    $error = "Có lỗi xảy ra: " . mysqli_error($conn);
+                }
+            } else {
+                $error = "Sách đã hết, không thể mượn!";
             }
-        } else {
-            $error = "Sách đã hết, không thể mượn!";
-        }
 
         header("Location: book.php?status=success&message=Mượn sách thành công!");
             exit();
-        }
+        }}
     } else {
         // Lấy thông tin từ session
         $ngayMuon = $_SESSION['ngayMuon'];
