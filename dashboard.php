@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require('config.php');
 
     if (!isset($_SESSION['userName']) || strtolower($_SESSION['role']) != ('admin' || 'thuthu') || strtolower($_SESSION['status']) != 'hoatdong') {
         include('logout.php');
@@ -10,6 +11,24 @@
         include('logout.php');
         exit();
     }
+
+    // Truy vấn số liệu
+    $sqlCount = "SELECT COUNT(*) FROM TaiKhoan";
+    $sqlCountTaiLieu = "SELECT COUNT(*) FROM TaiLieu";
+    $sqlCountSachMuon = "SELECT COUNT(*) FROM MuonTra WHERE trangThai = 'Đang mượn'";
+    $sqlCountSachTra = "SELECT COUNT(*) FROM MuonTra WHERE trangThai = 'Đã trả'";
+
+    // Thực hiện truy vấn
+    $result = mysqli_query($conn, $sqlCount);
+    $resultTaiLieu = mysqli_query($conn, $sqlCountTaiLieu);
+    $resultSachMuon = mysqli_query($conn, $sqlCountSachMuon);
+    $resultSachTra = mysqli_query($conn, $sqlCountSachTra);
+
+    // Lấy kết quả trả về
+    $count = ($result) ? mysqli_fetch_array($result)[0] : 0;
+    $countTaiLieu = ($resultTaiLieu) ? mysqli_fetch_array($resultTaiLieu)[0] : 0;
+    $countSachMuon = ($resultSachMuon) ? mysqli_fetch_array($resultSachMuon)[0] : 0;
+    $countSachTra = ($resultSachTra) ? mysqli_fetch_array($resultSachTra)[0] : 0;
     
 ?>
 
@@ -38,8 +57,8 @@
         </div>
 
         <div style="margin-left: 16px">
-        <h6 class="text-muted font-semibold">Profile Views</h6>
-        <h6 class="font-extrabold mb-0">112.000</h6>
+        <h6 class="text-muted font-semibold">Tài khoản</h6>
+        <h6 class="font-extrabold mb-0"><?php echo $count ?></h6>
         </div>
       </div>
       <div class="col box_db"> 
@@ -47,8 +66,8 @@
         </div>
 
         <div style="margin-left: 16px">
-        <h6 class="text-muted font-semibold">Profile Views</h6>
-        <h6 class="font-extrabold mb-0">112.000</h6>
+        <h6 class="text-muted font-semibold">Sách</h6>
+        <h6 class="font-extrabold mb-0"><?php echo $countTaiLieu ?> Quyển</h6>
         </div>
       </div>
       <div class="col box_db"> 
@@ -56,8 +75,8 @@
         </div>
 
         <div style="margin-left: 16px">
-        <h6 class="text-muted font-semibold">Profile Views</h6>
-        <h6 class="font-extrabold mb-0">112.000</h6>
+        <h6 class="text-muted font-semibold">Sách mượn</h6>
+        <h6 class="font-extrabold mb-0"><?php echo $countSachMuon ?> Quyển</h6>
         </div>
       </div>
       <div class="col box_db"> 
@@ -65,8 +84,8 @@
         </div>
 
         <div style="margin-left: 16px">
-        <h6 class="text-muted font-semibold">Profile Views</h6>
-        <h6 class="font-extrabold mb-0">112.000</h6>
+        <h6 class="text-muted font-semibold">Sách trả</h6>
+        <h6 class="font-extrabold mb-0"><?php echo $countSachTra ?> Quyển</h6>
         </div>
       </div>
     </div>
