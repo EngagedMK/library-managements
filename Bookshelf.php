@@ -71,7 +71,7 @@ $result = mysqli_query($conn, $sqlLogin);
                             </div>
                         </div>
                         <div class="my-2 d-flex justify-content-end w-80 mr-3 ">
-                            <td colspan="4"  style="text-align: center;"><a href="addBookshelf.html" class="p-2 bg-primary text-white rounded" style="display: flex; justify-content:cente; align-items:center" ><i class="fa fa-plus-square-o" aria-hidden="true" style="font-size:20px;margin-right: 8px; "></i></i>Thêm mới</a></td>
+                            <td colspan="4"  style="text-align: center;"><a href="addBookshelf.php" class="p-2 bg-primary text-white rounded" style="display: flex; justify-content:cente; align-items:center" ><i class="fa fa-plus-square-o" aria-hidden="true" style="font-size:20px;margin-right: 8px; "></i></i>Thêm mới</a></td>
                         </div>
                         
                         <div class="table-responsive">
@@ -104,7 +104,7 @@ $result = mysqli_query($conn, $sqlLogin);
                                     <td>
                                     <div class="d-flex align-items-center justify-content-center" >
                                         <a href="editBookshelf.php?id=<?php echo $item['idKeSach']; ?>" class="p-1 mx-1"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;color: #F6C200"></i></a>  
-                                        <a href="?id=<?php echo $item['idKeSach']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sách này không?')" class="p-1 mx-1">
+                                        <a href="deleteBookshelf.php?id=<?php echo $item['idKeSach']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sách này không?')" class="p-1 mx-1">
                                             <i class="fa fa-trash-o" aria-hidden="true" style="font-size:20px;color: #F63623"></i>
                                         </a>
                                     </div>
