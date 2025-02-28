@@ -125,6 +125,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
                       <span class="link hide">Thể loại</span>
                     </a>
                   </li>
+
+                  <li class="tooltip-element" data-tooltip="4">
+                    <a 
+                      href="Bookshelf.php" 
+                      class="<?php echo $current_page == 'Bookshelf.php' ? 'active' : ''; ?>" 
+                      data-active="4">
+                      <div class="icon">
+                      <i class='bx bx-bookmark-alt' ></i>
+                      <i class='bx bxs-bookmark-alt'></i>
+                      </div>
+                      <span class="link hide">Kệ sách</span>
+                    </a>
+                  </li>
                   </div>
                 </div>
               </div>
