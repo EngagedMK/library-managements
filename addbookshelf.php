@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Thêm kệ sách</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="./css/bookshelf.css">
     </head>
     </head>
@@ -29,18 +30,17 @@
     if ($check_result->num_rows > 0) {
         $error = "Tên tài liệu hoặc vị trí kệ sách đã tồn tại. Vui lòng chọn thông tin khác.";
     } else {
-        // Chèn dữ liệu mới
-        $insert_sql = "INSERT INTO kesach (sttKeSach, tenTaiLieu, sttCot, sttHang) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($insert_sql);
-        $stmt->bind_param("isii", $sttKeSach, $tenTaiLieu, $sttCot, $sttHang);
-        
-        if ($conn->query($insert_sql) === TRUE) {
-            echo "Thêm thành công!";
-            header("Location: Bookshelf.php");
-            exit();
-        } else {
-            echo "Thêm thất bại: " . $conn->error;
-        }
+       // Chèn dữ liệu mới
+       $insert_sql = "INSERT INTO kesach (sttKeSach, tenTaiLieu, sttCot, sttHang) VALUES (?, ?, ?, ?)";
+       $stmt = $conn->prepare($insert_sql);
+       $stmt->bind_param("isii", $sttKeSach, $tenTaiLieu, $sttCot, $sttHang);
+       
+       if ($stmt->execute()) { // Sử dụng execute() thay vì query()
+           header("Location: Bookshelf.php?status=success&message=Thêm thành công kệ sách!");
+           exit();
+       } else {
+           header("Location: Bookshelf.php?status=error&message=Lỗi khi thêm kệ sách!");
+       }
     }
    
     }
@@ -50,9 +50,18 @@
  
     <form action="addbookshelf.php" method="post">
             <h2>Điền thông tin kệ sách</h2>
-            <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
-            Số thứ tự kệ sách : <input type="text" name="sttKeSach"class="info" required><br>
+            <?php if (!empty($error)): ?>
+        <div class="alert alert-danger">
+            <?php echo $error; ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($success)): ?>
+        <div class="alert alert-success">
+            <?php echo $success; ?>
+        </div>
+    <?php endif; ?>
             Tên tài liệu: <input type="text" name="tenTaiLieu"class="info" required><br>
+            Số thứ tự kệ sách : <input type="number" name="sttKeSach"class="info" required><br>
             Số thứ tự cột: <input type="number" name="sttCot"class="info" required><br>
             Số thứ tự hàng: <input type="number" name="sttHang" class="info" required><br>
             

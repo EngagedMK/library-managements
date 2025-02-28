@@ -43,7 +43,7 @@ $kesach = $result->fetch_assoc();
             
             if ($conn->query($update_sql) === TRUE) {
                 echo "Cập nhật thành công!";
-                header("Location: Bookshelf.php");
+                header("Location: Bookshelf.php?status=success&message=Sửa thành công kệ sách!");
                 exit();
             } else {
                 echo "Cập nhật thất bại: " . $conn->error;
@@ -59,17 +59,28 @@ $kesach = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa thông tin kệ sách</title>
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bookshelf.css">
 </head>
 <body>
     <div class="chinh_sua">
         <h2>Chỉnh sửa thông tin sách</h2>
-        <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
+        <?php if (!empty($error)): ?>
+        <div class="alert alert-danger">
+            <?php echo $error; ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($success)): ?>
+        <div class="alert alert-success">
+            <?php echo $success; ?>
+        </div>
+    <?php endif; ?>
         <form method="POST">
-            <input type="hidden" name="idKeSach" value="<?php echo $kesach['idKeSach']; ?>">
+            <input type="hidden" name="idKeSach" value="<?php echo $kesach['idKeSach']; ?>" >
 
             Tên tài liệu: 
-            <input type="text" class="info" name="tenTaiLieu" value="<?php echo $kesach['tenTaiLieu']; ?>" required><br><br>
+            <input type="text" class="info disabled" name="tenTaiLieu" value="<?php echo $kesach['tenTaiLieu']; ?>" required readonly><br><br>
             
             Số thứ tự Kệ sách:
             <input type="text" class="info" name="sttKeSach" value="<?php echo $kesach['sttKeSach']; ?>" required><br><br>
