@@ -33,7 +33,7 @@
 <body>
 <nav class="navbar navbar-expand-custom navbar-mainbg" style="padding: 0 24px; z-index: 2">
     <!-- <div> -->
-        <a class="navbar-brand navbar-logo" href="#" style="padding: 0;"> <img src="../assets/img/logo.png" width="50px" alt="" /></a>
+        <a class="navbar-brand navbar-logo" href="docgia/index.php" style="padding: 0;"> <img src="../assets/img/logo.png" width="50px" alt="" /></a>
         <!-- <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars text-white"></i>
         </button> -->
