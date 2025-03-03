@@ -33,7 +33,7 @@
 <body>
 <nav class="navbar navbar-expand-custom navbar-mainbg" style="padding: 0 24px; z-index: 2">
     <!-- <div> -->
-        <a class="navbar-brand navbar-logo" href="docgia/index.php" style="padding: 0;"> <img src="../assets/img/logo.png" width="50px" alt="" /></a>
+        <a class="navbar-brand navbar-logo" href="index.php" style="padding: 0;"> <img src="../assets/img/logo.png" width="50px" alt="" /></a>
         <!-- <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars text-white"></i>
         </button> -->
@@ -65,9 +65,8 @@
                 </div>
             <!-- </button> -->
             <ul class="dropdown-menu dropdown-menu-lg-end">
-                <li><a class="dropdown-item" href="../logout.php" class="log-out" style=" display: flex;align-items: center;"> <i class="bx bx-log-out" style="display: flex;align-items: center; justify-content: center;width:30px;height:30px;border-radius:50%;background-color:#D8E9FF"></i> Menu item</a></li>
-                <!-- <li><a class="dropdown-item" href="#">Menu item</a></li>
-                <li><a class="dropdown-item" href="#">Menu item</a></li> -->
+              <li><a class="dropdown-item" href="bookManagement.php" class="log-out" style=" display: flex;align-items: center; "> <i class='bx bx-book-bookmark' style="display: flex;align-items: center; justify-content: center;width:30px;height:30px;border-radius:50%;background-color:#D8E9FF; "></i>Quản lý Sách</a></li>
+                <li><a class="dropdown-item" href="../logout.php" class="log-out" style=" display: flex;align-items: center;border-top:1px solid #E8E8E8; margin-top: 8px; "> <i class="bx bx-log-out" style="display: flex;align-items: center; justify-content: center;width:30px;height:30px;border-radius:50%;background-color:#D8E9FF"></i>logout</a></li>
             </ul>
         </div>
         <!-- </div> -->

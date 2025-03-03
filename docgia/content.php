@@ -28,7 +28,7 @@
                 <?php if ($result && mysqli_num_rows($result) > 0): ?>
                     <?php while ($book = mysqli_fetch_assoc($result)): ?>
                         <div class="col-md-3 mb-4">
-                            <a class="card h-100 hoverImages" href="borrow_book.php?id=<?= htmlspecialchars($book['idTaiLieu']) ?>"  style="box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;" href="">
+                            <a class="card btn h-100 hoverImages <?= $book['soLuong'] > 0 ? '' : 'disabled' ?>" href="borrow_book.php?id=<?= htmlspecialchars($book['idTaiLieu']) ?>"  style="box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;padding:0">
                                 <!-- Hiển thị hình ảnh -->
                                 <img src="../<?= htmlspecialchars($book['img_url']) ?>" class="card-img-top" alt="<?= htmlspecialchars($book['tenTaiLieu']) ?>" style="max-height: 300px">
                                 
@@ -123,5 +123,9 @@
     
     a {
         text-decoration: none;
+    }
+
+    .btn {
+        border: none;
     }
 </style>
