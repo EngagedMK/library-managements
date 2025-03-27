@@ -657,3 +657,12 @@ body.shrink .tooltip {
   border-radius: 8px;
   margin: 4px 8px;
 }
+
+.box_chart {
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: 100%;
+  padding: 20px 24px;
+  border-radius: 8px;
+  margin: 24px 8px;
+}

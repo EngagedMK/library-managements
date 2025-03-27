@@ -132,7 +132,7 @@ $result = $stmt->get_result();
                                 <?php endwhile; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="5" class="text-center">Không có tài liệu nào đang được mượn.</td>
+                                    <td colspan="6" class="text-center">Không có tài liệu nào đang được mượn.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
