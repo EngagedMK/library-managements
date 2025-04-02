@@ -167,6 +167,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span class="link hide">Trả sách</span>
               </a>
             </li>
+            <li class="tooltip-element" data-tooltip="5">
+              <a 
+                href="collect.php" 
+                class="<?php echo $current_page == 'collect.php' ? 'active' : ''; ?>" 
+                data-active="5">
+                <div class="icon">
+                <i class='bx bx-archive-out' ></i>
+                <i class='bx bxs-archive-out'></i>
+                </div>
+                <span class="link hide">Thu</span>
+              </a>
+            </li>
+
         </ul>
       </div>
 
