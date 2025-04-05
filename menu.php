@@ -180,6 +180,18 @@ $current_page = basename($_SERVER['PHP_SELF']);
               </a>
             </li>
 
+            <li class="tooltip-element" data-tooltip="7">
+              <a 
+                href="spend.php" 
+                class="<?php echo $current_page == 'spend.php' ? 'active' : ''; ?>" 
+                data-active="7">
+                <div class="icon">
+                <i class='bx bx-coin-stack' ></i>
+                <i class='bx bxs-coin-stack' ></i>
+                </div>
+                <span class="link hide">Chi</span>
+              </a>
+            </li>
         </ul>
       </div>
 
